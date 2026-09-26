@@ -56,7 +56,7 @@ def fetch_catalog(query, country="de"):
         return r.read().decode("utf-8", "replace")
 
 
-def parse_items(raw):
+def parse_items(raw, country="de"):
     """Parse listings from the SSR'd catalog HTML."""
     items = []
     seen = set()
@@ -83,7 +83,7 @@ def parse_items(raw):
         entry = parse_attr(attr) if attr else {"title": slug.replace("-", " ").title()}
         entry["id"] = iid
         entry["slug"] = slug
-        entry["url"] = f"https://www.vinted.de/items/{iid}-{slug}"
+        entry["url"] = f"https://www.vinted.{country}/items/{iid}-{slug}"
         items.append(entry)
 
     return items
@@ -162,7 +162,7 @@ def main():
     args = ap.parse_args()
 
     raw = fetch_catalog(args.query, args.country)
-    items = parse_items(raw)
+    items = parse_items(raw, args.country)
 
     if args.sort == "price":
         items = sorted(items, key=lambda x: (x.get("price") is None,

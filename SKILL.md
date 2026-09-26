@@ -61,6 +61,8 @@ python3 vinted_search.py "nike dunk" --country uk --limit 10 --json
           https://www.vinted.de/items/9754470841-beautiful-black-leather-moto-jack
   4.00 € | Leather jacket  [Primark · Gut · size EU 36]
           https://www.vinted.de/items/10116383100-leather-jacket
+
+> Item URLs follow the searched country (e.g. `--country fr` → `www.vinted.fr/...`).
 ```
 
 ## Requirements
@@ -82,9 +84,9 @@ python3 vinted_search.py "nike dunk" --country uk --limit 10 --json
 - **No guarantees of stability** — this depends on Vinted's undocumented HTML markup.
   If results come back empty or malformed, the place to fix them is `parse_items()` and
   `parse_attr()` (the `title`/`alt` attribute shape is what changes).
-- **Item links are hardcoded to `.de` in the returned URL.** If you search a non-German
-  country, rewrite the returned URL's host to that country if you need a clickable link
-  (the `/items/<id>-<slug>` path is identical across regions).
+- **Item URLs use the searched country's host** (e.g. `--country fr` → `www.vinted.fr/...`).
+  The `/items/<id>-<slug>` path is identical across regions, so links are clickable and
+  region-correct out of the box.
 - **Respect Vinted's terms of service.** This makes lightweight anonymous reads of a
   public page. Don't hammer it — add a small delay if you're doing bulk/paginated
   queries.

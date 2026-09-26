@@ -78,8 +78,8 @@ This repo doubles as an agent skill. Read `SKILL.md` for the drop-in instruction
 
 - Depends on Vinted's **undocumented, changing HTML**. If results come back empty/malformed,
   the place to fix them is `parse_items()` / `parse_attr()`.
-- Returned item URLs are hardcoded to the `.de` host; rewrite the host if you searched a
-  different country (the `/items/<id>-<slug>` path is identical across regions).
+- Item URLs follow the searched country (e.g. `--country fr` → `www.vinted.fr/...`);
+  the `/items/<id>-<slug>` path is identical across regions.
 - Respect Vinted's ToS and rate limits — this is a lightweight anonymous read, so keep it gentle.
 
 ## Disclaimer
